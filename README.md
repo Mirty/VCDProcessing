@@ -2,16 +2,16 @@
 
 ## Divisione in gruppi:
 
-* cartina geografica
+* Cartina geografica
 ** Erika
 ** Chiara
 ** Marta M
 
-* kinect
+* Kinect
 ** Linda
 ** Emiliano
 
-* data analisys
+* Data Analisys
 ** Federico
 ** Michele
 ** Marta S
