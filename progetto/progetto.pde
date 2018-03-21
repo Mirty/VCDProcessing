@@ -1,5 +1,5 @@
 Slider slider;
-int INTERVALLI_SLIDER = 7;
+int INTERVALLI_SLIDER = 11;
 
 void setup () {
   size (1200, 700);
