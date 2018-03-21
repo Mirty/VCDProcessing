@@ -1,8 +1,8 @@
 Slider slider;
-int [] anni = {1947, 1972, 1978, 1985, 1991, 1995, 1998, 2004, 2009, 2014, 2017};
-int INTERVALLI_SLIDER = anni.length;
+String [] anni = new String [0];
+int INTERVALLI_SLIDER = 18;
 Location [] locations = {};
-Milestone [] milestones = new Milestone [anni.length];
+Milestone [] milestones;
 Sede [] sedi = new Sede [5];
 PFont font;
 PFont fontBold;
@@ -16,7 +16,7 @@ void setup () {
   fontBold = createFont ("Arial Bold", 15);
   int margine = 100;
   slider = new Slider (new Punto (margine, height - margine), width - margine*2, INTERVALLI_SLIDER);
-  setMilestones ();
+  loadMilestones ();
   setSedi ();
 }
 
@@ -49,98 +49,28 @@ void setSedi () {
 }
 
 
-void setMilestones () {
-  // int anno, String titolo, String descrizione, Location coordinate, float zoom
-  int anno;
-  String titolo, descrizione;
-  Location coordinate;
-  float zoom;
+void loadMilestones() {
+  // Load the JSON file and grab the array.
+  JSONObject json = loadJSONObject("Milestones.json");
+  JSONArray milestoneData = json.getJSONArray("milestones");
 
-  // 1
-  anno = anni [0];
-  titolo = "Foundation";
-  descrizione = "Opening a small machine shop in the Pordenone area"; 
-  coordinate = new Location (1, 1);
-  zoom = 1;
-  milestones [0] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
+  // The size of the array of Bubble objects is determined by the length of the JSON array.
+  milestones = new Milestone[milestoneData.size()]; 
 
-  // 2
-  anno = anni [1];
-  titolo = "Acquired";
-  descrizione = "Brovedani is acquired by B. Zollia"; 
-  coordinate = new Location (1, 1);
-  zoom = 1;
-  milestones [1] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
+  for (int i = 0; i<milestoneData.size(); i++) {
 
-  // 3
-  anno = anni [2];
-  titolo = "Entry";
-  descrizione = "Entry into the Automotive Industry"; 
-  coordinate = new Location (1, 1);
-  zoom = 1;
-  milestones [2] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
+    // Iterate through the array, grabbing each JSON object one at a time.
+    JSONObject milestone = milestoneData.getJSONObject(i);
+    
+    // Get informations
+    String year = milestone.getString("year");
+    anni = append(anni, year);
+    printArray(anni);
+    String title = milestone.getString("title");
+    String description = milestone.getString("description");
+    String nation = milestone.getString("nation");
 
-  // 4
-  anno = anni [3];
-  titolo = "Production";
-  descrizione = "Production of micro-components for computer hard disk drives"; 
-  coordinate = new Location (1, 1);
-  zoom = 1;
-  milestones [3] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-
-  // 5
-  anno = anni [4];
-  titolo = "Entry";
-  descrizione = "Entry into the gasoline injection systems market. Brovedani technologies include laser welding, localized hard chrome deposits and high-vacuum annealing"; 
-  coordinate = new Location (1, 1);
-  zoom = 1;
-  milestones [4] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-
-  // 6
-  anno = anni [5];
-  titolo = "New Site:";
-  descrizione = "Modugno (Bari)"; 
-  coordinate = new Location (1, 1);
-  zoom = 1;
-  milestones [5] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-
-  // 7
-  anno = anni [6];
-  titolo = "Innovation:";
-  descrizione = "First Common Rail module production for Diesel systems"; 
-  coordinate = new Location (1, 1);
-  zoom = 1;
-  milestones [6] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-
-  // 8
-  anno = anni [7];
-  titolo = "Expansion is Slovakia:";
-  descrizione = "Brovedani expands its production facilities to Eastern Europe (Slovakia)"; 
-  coordinate = new Location (1, 1);
-  zoom = 1;
-  milestones [7] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-
-  // 9
-  anno = anni [8];
-  titolo = "Expansion in Mexico:";
-  descrizione = "Inauguration of new plant in Mexico to serve the NAFTA region"; 
-  coordinate = new Location (1, 1);
-  zoom = 1;
-  milestones [8] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-
-  // 10
-  anno = anni [9];
-  titolo = "Gasoline:";
-  descrizione = "Leader for Gasoline Direct Injection System"; 
-  coordinate = new Location (1, 1);
-  zoom = 1;
-  milestones [9] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-
-  // 11
-  anno = anni [10];
-  titolo = "Now:";
-  descrizione = "Bo"; 
-  coordinate = new Location (1, 1);
-  zoom = 1;
-  milestones [10] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
+    // Put the Bubble objects into an array.
+    milestones[i] = new Milestone(year, title, description, nation);
+  }
 }

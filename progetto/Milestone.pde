@@ -1,18 +1,16 @@
 class Milestone {
   // proprietà
-  int anno;
-  String titolo;
-  String descrizione;
-  Location coordinate;
-  float zoom;
+  String year;
+  String title;
+  String description;
+  String nation;
   
   // costruttori
-  Milestone (int anno, String titolo, String descrizione, Location coordinate, float zoom) {
-    this.anno = anno;
-    this.titolo = titolo;
-    this.descrizione = descrizione;
-    this.coordinate = coordinate;
-    this.zoom = zoom;
+  Milestone (String year, String title, String description, String nation) {
+    this.year = year;
+    this.title = title;
+    this.nation = nation;
+    this.description = description;
   }
   
   // metodi e funzioni

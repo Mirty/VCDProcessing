@@ -33,7 +33,21 @@ class Sede {
 
   // metodi e funzioni
   void draw () {
+    // fondazione
     
+    // superficie totale
+    
+    // superficie produzione
+    
+    // impiegati
+    int start = 0;
+    for (int i = 0; i < n_omini; i++) {
+      //image ("");
+    }
+    
+    // produzione annuale
+    
+    // vendite annuali
   }
 
   void setVariables () {
