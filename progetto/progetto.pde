@@ -3,6 +3,7 @@ int [] anni = {1947, 1972, 1978, 1985, 1991, 1995, 1998, 2004, 2009, 2014, 2017}
 int INTERVALLI_SLIDER = anni.length;
 Location [] locations = {};
 Milestone [] milestones = new Milestone [anni.length];
+Sede [] sedi = new Sede [5];
 PFont font;
 PFont fontBold;
 
@@ -16,17 +17,18 @@ void setup () {
   int margine = 100;
   slider = new Slider (new Punto (margine, height - margine), width - margine*2, INTERVALLI_SLIDER);
   setMilestones ();
+  setSedi ();
 }
 
 
 void draw () {
   background (255);
+  
   slider.draw ();
   slider.detectMouseInteraction ();
-  disegnaGrafici ();
 }
 
-
+/*
 void disegnaGrafici () {
   noFill();
   // esterno
@@ -38,6 +40,11 @@ void disegnaGrafici () {
   // superficie produttiva
   strokeWeight (2);
   arc(100, 155, 70, 70, - radians (65), radians (40));
+  
+}*/
+
+
+void setSedi () {
   
 }
 
