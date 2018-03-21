@@ -1,14 +1,18 @@
 Slider slider;
 int [] anni = {1947, 1972, 1978, 1985, 1991, 1995, 1998, 2004, 2009, 2014, 2017};
-int INTERVALLI_SLIDER = 18; //anni.length;
+int INTERVALLI_SLIDER = anni.length;
 Location [] locations = {};
 Milestone [] milestones = new Milestone [anni.length];
+PFont font;
+PFont fontBold;
 
 void setup () {
   //size (1200, 700);
-  fullScreen ();
+  fullScreen (P2D);
   background (255);
 
+  font = createFont ("Arial", 13);
+  fontBold = createFont ("Arial Bold", 15);
   int margine = 100;
   slider = new Slider (new Punto (margine, height - margine), width - margine*2, INTERVALLI_SLIDER);
   setMilestones ();

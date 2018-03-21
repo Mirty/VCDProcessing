@@ -30,8 +30,16 @@ class Slider {
     stroke (colore);
     rect (inizio_barra.x, inizio_barra.y- 1.4/2, lunghezza, 1.4, 5);
     triangle(inizio_barra.x + lunghezza - 10, inizio_barra.y - 5, inizio_barra.x + lunghezza + 2, inizio_barra.y, inizio_barra.x + lunghezza - 10, inizio_barra.y + 5);
+    textSize (14);
     for (int i = 0; i < intervalli; i++) {
+      if (pallino.x == punti[i].x) textFont (fontBold);
+      else textFont (font);
       ellipse (punti [i].x, punti[i].y, 5, 5);
+      pushMatrix ();
+      translate (punti [i].x, inizio_barra.y + 20); 
+      rotate (radians(40));
+      text (anni[i], 0, 0);
+      popMatrix ();
     }
     ellipse (pallino.x, pallino.y, diametro, diametro);
   }
@@ -39,8 +47,7 @@ class Slider {
   void detectMouseInteraction () {
     if (mousePressed) { 
       // determino la nuova posizione della barra tenendo conto dei divisori
-      if (isBetween (mouseY, inizio_barra.y - errore, inizio_barra.y + errore) 
-        && isBetween (mouseX, inizio_barra.x - errore, inizio_barra.x + lunghezza + errore)) {
+      if (isMouseOver()) {
         Punto new_point = new Punto (mouseX, pallino.y);
         pallino.x = getClosestPoint(new_point).x;
       }
@@ -51,7 +58,7 @@ class Slider {
   }
 
   boolean isMouseOver () {
-    return isBetween (mouseY, inizio_barra.y - errore, inizio_barra.y + errore) 
+    return isBetween (mouseY, inizio_barra.y - errore, inizio_barra.y + errore*2) 
       && isBetween (mouseX, inizio_barra.x - errore, inizio_barra.x + lunghezza + errore);
   }
 
