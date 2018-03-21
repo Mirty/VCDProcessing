@@ -28,7 +28,11 @@ class Slider {
   void draw () {
     fill (colore);
     stroke (colore);
-    line (inizio_barra.x, inizio_barra.y, inizio_barra.x + lunghezza, inizio_barra.y);
+    rect (inizio_barra.x, inizio_barra.y- 1.4/2, lunghezza, 1.4, 5);
+    //line (inizio_barra.x, inizio_barra.y, inizio_barra.x + lunghezza, inizio_barra.y);
+    for (int i = 0; i < intervalli; i++) {
+      ellipse (punti [i].x, punti[i].y, 5, 5);
+    }
     ellipse (pallino.x, pallino.y, diametro, diametro);
   }
 
@@ -41,14 +45,14 @@ class Slider {
         pallino.x = getClosestPoint(new_point).x;
       }
     }
-    
+
     if (isMouseOver()) cursor (HAND);
     else cursor (ARROW);
   }
-  
+
   boolean isMouseOver () {
     return isBetween (mouseY, inizio_barra.y - errore, inizio_barra.y + errore) 
-        && isBetween (mouseX, inizio_barra.x - errore, inizio_barra.x + lunghezza + errore);
+      && isBetween (mouseX, inizio_barra.x - errore, inizio_barra.x + lunghezza + errore);
   }
 
   Punto getClosestPoint (Punto point) {
