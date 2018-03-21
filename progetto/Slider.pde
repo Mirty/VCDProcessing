@@ -29,6 +29,7 @@ class Slider {
     fill (colore);
     stroke (colore);
     rect (inizio_barra.x, inizio_barra.y- 1.4/2, lunghezza, 1.4, 5);
+    triangle(inizio_barra.x + lunghezza - 10, inizio_barra.y - 5, inizio_barra.x + lunghezza + 2, inizio_barra.y, inizio_barra.x + lunghezza - 10, inizio_barra.y + 5);
     for (int i = 0; i < intervalli; i++) {
       ellipse (punti [i].x, punti[i].y, 5, 5);
     }

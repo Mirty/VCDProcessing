@@ -1,11 +1,12 @@
 Slider slider;
-int [] anni = {1947, 1972, 1978, 1985, 1991, 1995,1998, 2004, 2009, 2014, 2017};
+int [] anni = {1947, 1972, 1978, 1985, 1991, 1995, 1998, 2004, 2009, 2014, 2017};
 int INTERVALLI_SLIDER = 18; //anni.length;
 Location [] locations = {};
 Milestone [] milestones = new Milestone [anni.length];
 
 void setup () {
-  size (1200, 700);
+  //size (1200, 700);
+  fullScreen ();
   background (255);
 
   int margine = 100;
@@ -13,13 +14,37 @@ void setup () {
   setMilestones ();
 }
 
-void setMilestones ()  {
+
+void draw () {
+  background (255);
+  slider.draw ();
+  slider.detectMouseInteraction ();
+  disegnaGrafici ();
+}
+
+
+void disegnaGrafici () {
+  noFill();
+  // esterno
+  strokeWeight (2);
+  arc(100, 155, 100, 100, - radians (90), radians (90));
+  // superficie totale
+  strokeWeight (2);
+  arc(100, 155, 85, 85, - radians (80), radians (70));
+  // superficie produttiva
+  strokeWeight (2);
+  arc(100, 155, 70, 70, - radians (65), radians (40));
+  
+}
+
+
+void setMilestones () {
   // int anno, String titolo, String descrizione, Location coordinate, float zoom
   int anno;
   String titolo, descrizione;
   Location coordinate;
   float zoom;
-  
+
   // 1
   anno = anni [0];
   titolo = "Foundation";
@@ -27,7 +52,7 @@ void setMilestones ()  {
   coordinate = new Location (1, 1);
   zoom = 1;
   milestones [0] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-  
+
   // 2
   anno = anni [1];
   titolo = "Acquired";
@@ -35,7 +60,7 @@ void setMilestones ()  {
   coordinate = new Location (1, 1);
   zoom = 1;
   milestones [1] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-  
+
   // 3
   anno = anni [2];
   titolo = "Entry";
@@ -43,7 +68,7 @@ void setMilestones ()  {
   coordinate = new Location (1, 1);
   zoom = 1;
   milestones [2] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-  
+
   // 4
   anno = anni [3];
   titolo = "Production";
@@ -51,7 +76,7 @@ void setMilestones ()  {
   coordinate = new Location (1, 1);
   zoom = 1;
   milestones [3] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-  
+
   // 5
   anno = anni [4];
   titolo = "Entry";
@@ -59,7 +84,7 @@ void setMilestones ()  {
   coordinate = new Location (1, 1);
   zoom = 1;
   milestones [4] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-  
+
   // 6
   anno = anni [5];
   titolo = "New Site:";
@@ -67,7 +92,7 @@ void setMilestones ()  {
   coordinate = new Location (1, 1);
   zoom = 1;
   milestones [5] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-  
+
   // 7
   anno = anni [6];
   titolo = "Innovation:";
@@ -75,7 +100,7 @@ void setMilestones ()  {
   coordinate = new Location (1, 1);
   zoom = 1;
   milestones [6] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-  
+
   // 8
   anno = anni [7];
   titolo = "Expansion is Slovakia:";
@@ -83,7 +108,7 @@ void setMilestones ()  {
   coordinate = new Location (1, 1);
   zoom = 1;
   milestones [7] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-  
+
   // 9
   anno = anni [8];
   titolo = "Expansion in Mexico:";
@@ -91,7 +116,7 @@ void setMilestones ()  {
   coordinate = new Location (1, 1);
   zoom = 1;
   milestones [8] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-  
+
   // 10
   anno = anni [9];
   titolo = "Gasoline:";
@@ -99,7 +124,7 @@ void setMilestones ()  {
   coordinate = new Location (1, 1);
   zoom = 1;
   milestones [9] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-  
+
   // 11
   anno = anni [10];
   titolo = "Now:";
@@ -107,11 +132,4 @@ void setMilestones ()  {
   coordinate = new Location (1, 1);
   zoom = 1;
   milestones [10] = new Milestone (anno, titolo, descrizione, coordinate, zoom);
-}
-
-
-void draw () {
-  background (255);
-  slider.draw ();
-  slider.detectMouseInteraction ();
 }
