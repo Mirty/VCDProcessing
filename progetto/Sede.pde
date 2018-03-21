@@ -42,7 +42,7 @@ class Sede {
     // impiegati
     int start = 0;
     for (int i = 0; i < n_omini; i++) {
-      //image ("");
+      //image ();
     }
     
     // produzione annuale

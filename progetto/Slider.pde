@@ -45,16 +45,13 @@ class Slider {
   }
 
   void detectMouseInteraction () {
-    if (mousePressed) { 
-      // determino la nuova posizione della barra tenendo conto dei divisori
-      if (isMouseOver()) {
-        Punto new_point = new Punto (mouseX, pallino.y);
+    if (isBetween (tracker.getPos().y, inizio_barra.y - errore, inizio_barra.y + errore) 
+        && isBetween (tracker.getPos().x, inizio_barra.x - errore, inizio_barra.x + lunghezza + errore)) {
+        Punto new_point = new Punto (int(tracker.getPos().x), pallino.y);
         pallino.x = getClosestPoint(new_point).x;
+        //tracker.init_time++;
+        
       }
-    }
-
-    if (isMouseOver()) cursor (HAND);
-    else cursor (ARROW);
   }
 
   boolean isMouseOver () {
