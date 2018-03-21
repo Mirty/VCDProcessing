@@ -8,7 +8,7 @@ PFont fontBold;
 
 void setup () {
   //size (1200, 700);
-  fullScreen (P2D);
+  fullScreen ();
   background (255);
 
   font = createFont ("Arial", 13);
