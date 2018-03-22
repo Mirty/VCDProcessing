@@ -1,4 +1,7 @@
-int DIAMETRO = 100;
+int DIAMETRO = 300;
+color colore_principale = color (20, 151, 24);
+color colore_secondario = color (138,203,140);
+color colore_terziario = color (255);
 
 class Sede {
   // proprietà
@@ -13,8 +16,8 @@ class Sede {
   // altre proprieta utili
   float angolo_iniziale;
   float angolo_finale;
-  int max_raggio;
-  float raggio;
+  int max_diametro, min_diametro;
+  float diametro;
   float angolo_superficie_produzione;
   int n_omini;
   float grandezza_rotella;
@@ -35,27 +38,48 @@ class Sede {
   // metodi e funzioni
   void draw () {
     // fondazione
-    strokeWeight (2);
-    stroke(#718A62);
+    int spessore = 12;
+    strokeWeight (spessore);
+    stroke(colore_principale);
     noFill ();
     arc (coordinate.x, coordinate.y, DIAMETRO, DIAMETRO, angolo_iniziale, angolo_finale);
     pushMatrix();
-    translate(coordinate.x + DIAMETRO, coordinate.y - DIAMETRO*1.25);
-    rotate(radians(54)); 
-    strokeWeight(4);
-    line(0, 0, 10, 120); 
+    translate(coordinate.x + cos(radians (90)) * DIAMETRO/2 + spessore/3, coordinate.y - sin(radians(90)) * DIAMETRO/2 - spessore/3);
+    rotate (radians (-45));
+    strokeWeight(spessore);
+    line(0, 0, 200, 0); 
+    fill (colore_terziario);
+    text (nome, 10, 5);
     popMatrix();
 
     // superficie totale
-    stroke(#669900);
-    strokeWeight (1);
-    ellipse(coordinate.x, coordinate.y, raggio, raggio);
+    int distanza = 10;
+    int spessore_superficie = spessore - 5;
+    noFill ();
+    stroke(colore_secondario);
+    strokeWeight (spessore_superficie);
+    ellipse(coordinate.x, coordinate.y, diametro-spessore-distanza, diametro-spessore-distanza);
 
     // superficie produzione
-    strokeWeight (3);
-    stroke(#006699, 150);
-    arc(coordinate.x, coordinate.y, raggio, raggio, angolo_iniziale, angolo_superficie_produzione);
-
+    strokeWeight (spessore_superficie + 2);
+    stroke(colore_principale, 150);
+    arc(coordinate.x, coordinate.y, diametro-spessore-distanza, diametro-spessore-distanza, angolo_iniziale, angolo_superficie_produzione);
+    pushMatrix();
+    stroke(colore_principale, 200);
+    translate(coordinate.x + cos(radians (70)) * diametro/2, coordinate.y - sin(radians(70)) * diametro/2 + spessore_superficie*2);
+    rotate (radians (-45));
+    strokeWeight(spessore);
+    line(0, 0, 250, 0); 
+    fill (colore_terziario);
+    text ("Superficie totale : " + superficie_totale + " sqm", 10, 5);
+    popMatrix ();
+    pushMatrix();
+    translate(coordinate.x + cos(radians (50)) * diametro/2, coordinate.y - sin(radians(50)) * diametro/2 + spessore_superficie*2);
+    rotate (radians (-45));
+    line(0, 0, 300, 0); 
+    text ("Superficie di produzione : " + superficie_produzione + " sqm", 10, 5);
+    popMatrix ();
+    
     // impiegati
     int distanza_tra_imgs = 20;
     for (int i = 0; i < n_omini; i++) {
@@ -91,8 +115,9 @@ class Sede {
     angolo_finale = map (anno_fondazione, min (tot_anni_fondazione), max(tot_anni_fondazione), angolo_iniziale/2, 2*PI);
 
     // curva superficie
-    max_raggio = 100;
-    raggio = map (superficie_totale, min (tot_superfici_totali), max (tot_superfici_totali), 0, max_raggio);
+    max_diametro = DIAMETRO;
+    min_diametro = 20;
+    diametro = map (superficie_totale, min (tot_superfici_totali), max (tot_superfici_totali), min_diametro, max_diametro);
     angolo_superficie_produzione = map (superficie_produzione, 0, superficie_totale, 0, 2*PI);
 
     // omini impiegati
