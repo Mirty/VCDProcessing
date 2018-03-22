@@ -50,7 +50,7 @@ class Slider {
   }
 
   int detectMouseInteraction () {
-    if (mousePressed) {
+    if (mousePressed && mouseY > height * 2/3) {
       pallino.x = getClosestPoint(new Punto(mouseX, mouseY)).x;
       for (int i = 0; i != punti.length; ++i) {
         if (pallino.x == punti[i].x) {
