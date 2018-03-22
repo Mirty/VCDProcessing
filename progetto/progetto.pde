@@ -157,40 +157,6 @@ void draw () {
   }
 }
 
-//test (da eliminare)
-void bottone() {
-  if (tracker.getPos().x<400&&tracker.getPos().x>200&&tracker.getPos().y<400&&tracker.getPos().y>200) {
-    tracker.init_time++;
-  } else {
-    tracker.init_time=0;
-  }
-  if (tracker.init_time>=tracker.click_time) {
-    ellipse(300, 300, 70, 70);
-  } else {
-    ellipse(300, 300, 100, 100);
-  }
-}
-
-
-void setSedi () {
-  // prova con dati random
-  for (int i=0; i<sedi.length; i++) {
-    // nome, anno_fondazione, superficie_totale, superficie_produzione, 
-    // n_impiegati, pezzi_annuali, vendite_annuali, coordinate
-    String nome = "Sede "+ (i+1);
-    int fondazione = int(random (1947, 2017));
-    float sup_tot = random (100, 200);
-    float sup_prod = random (30, 80);
-    int impiegati = int(random (30, 300));
-    int pezzi_annuali = int (random (6, 76));
-    float vendite_annuali = random (7.54, 36.7);
-    Location coordinate = new Location (random (MARGINE*2, width - MARGINE*2), random (MARGINE*2, height - MARGINE*2));
-    sedi [i] = new Sede (nome, fondazione, sup_tot, sup_prod, impiegati, pezzi_annuali, vendite_annuali, coordinate);
-  }
-
-  for (int i=0; i<sedi.length; i++) sedi[i].setVariables();
-}
-
 
 void loadMilestones() {
   // Load the JSON file and grab the array.
@@ -214,6 +180,7 @@ void loadMilestones() {
 
     // Put the Bubble objects into an array.
     milestones[i] = new Milestone(year, title, description, nation);
+    println (milestones[i].year);
   }
 }
 
@@ -223,22 +190,22 @@ void loadSedi() {
   JSONArray sediData = json.getJSONArray("sedi");
 
   // The size of the array of Bubble objects is determined by the length of the JSON array.
-  milestones = new Milestone[sediData.size()]; 
+  sedi = new Sede[sediData.size()]; 
 
   for (int i = 0; i<sediData.size(); i++) {
 
     // Iterate through the array, grabbing each JSON object one at a time.
-    JSONObject milestone = sediData.getJSONObject(i);
+    JSONObject sede = sediData.getJSONObject(i);
 
-    String nome = milestone.getString("nome");
-    int fondazione = milestone.getInt("anno_fondazione");
-    float sup_tot = milestone.getFloat("superficie_totale");
-    float sup_prod = milestone.getFloat("superficie_produzione");
-    int impiegati = milestone.getInt("n_impiegati");
-    float pezzi_annuali = milestone.getFloat("pezzi_annuali");
-    float vendite_annuali = milestone.getFloat("vendite_annuali");
-    float coordinatax = milestone.getFloat("coordinatex");
-    float coordinatay = milestone.getFloat("coordinatey");
+    String nome = sede.getString("nome");
+    int fondazione = sede.getInt("anno_fondazione");
+    float sup_tot = sede.getFloat("superficie_totale");
+    float sup_prod = sede.getFloat("superficie_produzione");
+    int impiegati = sede.getInt("n_impiegati");
+    float pezzi_annuali = sede.getFloat("pezzi_annuali");
+    float vendite_annuali = sede.getFloat("vendite_annuali");
+    float coordinatax = sede.getFloat("coordinatex");
+    float coordinatay = sede.getFloat("coordinatey");
     Location coordinate = new Location (coordinatax, coordinatay);
     sedi [i] = new Sede (nome, fondazione, sup_tot, sup_prod, impiegati, pezzi_annuali, vendite_annuali, coordinate);
   }
