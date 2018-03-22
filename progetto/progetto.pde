@@ -95,6 +95,7 @@ void setup () {
   loadSedi ();
 }
 
+int indicePunto;
 
 void draw () {
   background (255);
@@ -108,13 +109,20 @@ void draw () {
   ellipse(v1.x, v1.y, 50, 50);
 
   slider.draw ();
-  int indicePunto = slider.detectMouseInteraction ();
+  indicePunto = slider.detectMouseInteraction ();
+ 
+  for (int i = 0; i < sedi.length; i++) {
+    sedi[i].draw ();
+  }
+}
+
+void mouseClicked() {
   Milestone current = milestones[indicePunto];
-  println (indicePunto);
-  if (mousePressed) {
+
     switch(current.nation) {
     case "Queretaro":
       map.zoomAndPanToFit(Messico);
+      println(Messico.toString());
       break;
     case "Galanta":
       map.zoomAndPanToFit(Slovakia);
@@ -150,11 +158,9 @@ void draw () {
       galantaMarker.setHidden(false);
       queretaroMarker.setHidden(false);
     }
-  }
+  
 
-  for (int i = 0; i < sedi.length; i++) {
-    sedi[i].draw ();
-  }
+  
 }
 
 
@@ -180,7 +186,7 @@ void loadMilestones() {
 
     // Put the Bubble objects into an array.
     milestones[i] = new Milestone(year, title, description, nation);
-    println (milestones[i].year);
+    //println (milestones[i].year);
   }
 }
 
