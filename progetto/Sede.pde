@@ -46,7 +46,7 @@ class Sede {
     pushMatrix();
     translate(pos.x + cos(radians (90)) * DIAMETRO/2 + spessore/3, pos.y - sin(radians(90)) * DIAMETRO/2 - spessore/3);
     rotate (radians (-45));
-    strokeWeight(spessore);
+    strokeWeight (15);
     line(0, 0, 200, 0); 
     fill (colore_terziario);
     text (nome, 10, 5);
@@ -59,24 +59,29 @@ class Sede {
     stroke(colore_secondario);
     strokeWeight (spessore_superficie);
     ellipse(pos.x, pos.y, diametro-spessore-distanza, diametro-spessore-distanza);
-
-    // superficie produzione
-    strokeWeight (spessore_superficie + 2);
-    stroke(colore_principale, 150);
-    arc(pos.x, pos.y, diametro-spessore-distanza, diametro-spessore-distanza, angolo_iniziale, angolo_superficie_produzione);
     pushMatrix();
-    stroke(colore_principale, 200);
-    translate(pos.x + cos(radians (70)) * diametro/2, pos.y - sin(radians(70)) * diametro/2 + spessore_superficie*2);
+    stroke(colore_secondario);
+    translate(pos.x + cos(radians (400)) * diametro/2, pos.y - sin(radians(400)) * diametro/2 + spessore_superficie*2);
     rotate (radians (-45));
     strokeWeight(spessore);
+    strokeWeight (15);
     line(0, 0, 250, 0); 
     fill (colore_terziario);
     text ("Superficie totale : " + superficie_totale + " sqm", 10, 5);
     popMatrix ();
+
+    // superficie produzione
+    strokeWeight (spessore_superficie + 2);
+    noFill ();
+    stroke(colore_principale, 150);
+    arc(pos.x, pos.y, diametro-spessore-distanza, diametro-spessore-distanza, angolo_iniziale, angolo_superficie_produzione);
     pushMatrix();
-    translate(pos.x + cos(radians (50)) * diametro/2, pos.y - sin(radians(50)) * diametro/2 + spessore_superficie*2);
+    translate(pos.x + cos(radians (50)) * diametro/2, pos.y - sin(radians(50)) * diametro/2 + spessore_superficie*2 - 2);
     rotate (radians (-45));
+    fill (colore_principale, 150);
+    strokeWeight (15);
     line(0, 0, 300, 0); 
+    fill (255);
     text ("Superficie di produzione : " + superficie_produzione + " sqm", 10, 5);
     popMatrix ();
     
@@ -112,7 +117,7 @@ class Sede {
 
     // curva fondazione   
     angolo_iniziale = - PI;
-    angolo_finale = map (anno_fondazione, min (tot_anni_fondazione), max(tot_anni_fondazione), angolo_iniziale/2, 2*PI);
+    angolo_finale = map (anno_fondazione, min (tot_anni_fondazione), max(tot_anni_fondazione), 2*PI, angolo_iniziale/2);
 
     // curva superficie
     max_diametro = DIAMETRO;

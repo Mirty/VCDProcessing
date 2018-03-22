@@ -236,6 +236,9 @@ void loadSedi() {
     Location coordinate = new Location (coordinatax, coordinatay);
     sedi [i] = new Sede (nome, fondazione, sup_tot, sup_prod, impiegati, pezzi_annuali, vendite_annuali, coordinate);
   }
+  for (int i = 0; i<sediData.size(); i++) {
+    sedi[i].setVariables();
+  }
 }
 
 
