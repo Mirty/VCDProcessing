@@ -42,9 +42,9 @@ class Sede {
     strokeWeight (spessore);
     stroke(colore_principale);
     noFill ();
-    arc (coordinate.x, coordinate.y, DIAMETRO, DIAMETRO, angolo_iniziale, angolo_finale);
+    arc (pos.x, pos.y, DIAMETRO, DIAMETRO, angolo_iniziale, angolo_finale);
     pushMatrix();
-    translate(coordinate.x + cos(radians (90)) * DIAMETRO/2 + spessore/3, coordinate.y - sin(radians(90)) * DIAMETRO/2 - spessore/3);
+    translate(pos.x + cos(radians (90)) * DIAMETRO/2 + spessore/3, pos.y - sin(radians(90)) * DIAMETRO/2 - spessore/3);
     rotate (radians (-45));
     strokeWeight(spessore);
     line(0, 0, 200, 0); 
@@ -58,15 +58,15 @@ class Sede {
     noFill ();
     stroke(colore_secondario);
     strokeWeight (spessore_superficie);
-    ellipse(coordinate.x, coordinate.y, diametro-spessore-distanza, diametro-spessore-distanza);
+    ellipse(pos.x, pos.y, diametro-spessore-distanza, diametro-spessore-distanza);
 
     // superficie produzione
     strokeWeight (spessore_superficie + 2);
     stroke(colore_principale, 150);
-    arc(coordinate.x, coordinate.y, diametro-spessore-distanza, diametro-spessore-distanza, angolo_iniziale, angolo_superficie_produzione);
+    arc(pos.x, pos.y, diametro-spessore-distanza, diametro-spessore-distanza, angolo_iniziale, angolo_superficie_produzione);
     pushMatrix();
     stroke(colore_principale, 200);
-    translate(coordinate.x + cos(radians (70)) * diametro/2, coordinate.y - sin(radians(70)) * diametro/2 + spessore_superficie*2);
+    translate(pos.x + cos(radians (70)) * diametro/2, pos.y - sin(radians(70)) * diametro/2 + spessore_superficie*2);
     rotate (radians (-45));
     strokeWeight(spessore);
     line(0, 0, 250, 0); 
@@ -74,7 +74,7 @@ class Sede {
     text ("Superficie totale : " + superficie_totale + " sqm", 10, 5);
     popMatrix ();
     pushMatrix();
-    translate(coordinate.x + cos(radians (50)) * diametro/2, coordinate.y - sin(radians(50)) * diametro/2 + spessore_superficie*2);
+    translate(pos.x + cos(radians (50)) * diametro/2, pos.y - sin(radians(50)) * diametro/2 + spessore_superficie*2);
     rotate (radians (-45));
     line(0, 0, 300, 0); 
     text ("Superficie di produzione : " + superficie_produzione + " sqm", 10, 5);
@@ -83,15 +83,15 @@ class Sede {
     // impiegati
     int distanza_tra_imgs = 20;
     for (int i = 0; i < n_omini; i++) {
-      image (img_employee, coordinate.x + DIAMETRO/2 + 10 + distanza_tra_imgs * i, coordinate.y - 20, 20, 20);
+      image (img_employee, pos.x + DIAMETRO/2 + 10 + distanza_tra_imgs * i, pos.y - 20, 20, 20);
     }
 
     // produzione annuale
-    image (img_gear, coordinate.x + DIAMETRO/2 + 10 + grandezza_rotella/2, coordinate.y + grandezza_rotella/2, grandezza_rotella, grandezza_rotella);
+    image (img_gear, pos.x + DIAMETRO/2 + 10 + grandezza_rotella/2, pos.y + grandezza_rotella/2, grandezza_rotella, grandezza_rotella);
 
     // vendite annuali
     for (int i = 0; i < n_monete; i++) {
-      image (img_euro, coordinate.x + DIAMETRO/2 + 10 + distanza_tra_imgs * i, coordinate.y + grandezza_rotella/2 + 20, 30, 30);
+      image (img_euro, pos.x + DIAMETRO/2 + 10 + distanza_tra_imgs * i, pos.y + grandezza_rotella/2 + 20, 30, 30);
     }
   }
 

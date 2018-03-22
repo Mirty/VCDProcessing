@@ -20,6 +20,7 @@ PImage img_euro;
 KinectTracker tracker;
 Kinect kinect;
 ScreenPosition pos;
+ArrayList <Boolean> mostra = new ArrayList <Boolean> ();
 ArrayList<Location> FVG = new ArrayList<Location>();
 ArrayList<Location> Puglia = new ArrayList<Location>();
 ArrayList<Location> SedeSlovakia = new ArrayList<Location>();
@@ -32,6 +33,8 @@ ArrayList<Location> Messico = new ArrayList<Location>();
 ArrayList<Location> ItaliaSlovakia = new ArrayList<Location>();
 ArrayList<Location> Mondo = new ArrayList<Location>();
 
+ArrayList <SimplePointMarker> markers = new ArrayList <SimplePointMarker> ();
+
 Location SanVito = new Location(45.94, 12.87);
 Location Bari = new Location(41.11, 16.77);
 Location Galanta = new Location(48.18, 17.73);
@@ -41,6 +44,13 @@ SimplePointMarker sanVitoMarker;
 SimplePointMarker galantaMarker;
 SimplePointMarker queretaroMarker;
 SimplePointMarker bariMarker;
+
+ScreenPosition positionSanVito;
+ScreenPosition positionBari;
+ScreenPosition positionGalanta;
+ScreenPosition positionQueretaro;
+
+ArrayList <ScreenPosition> positions = new ArrayList <ScreenPosition> ();
 
 void setup () {
   //size (1200, 700);
@@ -60,7 +70,7 @@ void setup () {
   ItaliaSlovakia.add(new Location(36.0, 12.86));
   Mondo.add(new Location(62.92, -120.83));
   Mondo.add(new Location(-8.27, 38.74));
-  
+
   FVG.add(new Location(47.16, 12.87));
   FVG.add(new Location(44.67, 12.87));
   Puglia.add(new Location(42.50, 16.77));
@@ -90,9 +100,23 @@ void setup () {
   queretaroMarker.setStrokeColor(color(0, 153, 0));
   queretaroMarker.setStrokeWeight(5);
   bariMarker.setColor(color(0, 153, 0));
-  bariMarker.setColor(color(0, 153, 0));
   bariMarker.setStrokeColor(color(0, 153, 0));
   bariMarker.setStrokeWeight(5);
+
+  markers.add (sanVitoMarker);
+  markers.add (bariMarker);
+  markers.add (galantaMarker);
+  markers.add (queretaroMarker);
+
+  positionSanVito = map.getScreenPosition(SanVito);
+  positionBari = map.getScreenPosition(Bari);
+  positionGalanta = map.getScreenPosition(Galanta);
+  positionQueretaro = map.getScreenPosition(Queretaro);
+
+  positions.add (positionSanVito);
+  positions.add (positionBari);
+  positions.add (positionGalanta);
+  positions.add (positionQueretaro);
 
   MapUtils.createDefaultEventDispatcher(this, map);
 
@@ -114,6 +138,12 @@ void setup () {
 
   loadMilestones ();
   loadSedi ();
+
+
+  mostra.add(false);
+  mostra.add(false);
+  mostra.add(false);
+  mostra.add(false);
 }
 
 int indicePunto;
@@ -131,9 +161,26 @@ void draw () {
 
   slider.draw ();
   indicePunto = slider.detectMouseInteraction ();
-
+  /*
   for (int i = 0; i < sedi.length; i++) {
-    sedi[i].draw ();
+   if (markers.get(i).isInside(mouseX, mouseY, positions.get(i).x, positions.get(i).y) && indicePunto == INTERVALLI_SLIDER - 1) {
+   println (i);
+   pos = map.getScreenPosition(markers.get(i).getLocation ());
+   sedi[i].draw ();
+   }
+   }*/
+  /*
+  println (markers.get(0).getLocation (), positions.get(0));
+   if (markers.get(0).isInside(mouseX, mouseY, positions.get(0).x, positions.get(0).y) && indicePunto == INTERVALLI_SLIDER - 1) {
+   println (0);
+   pos = map.getScreenPosition(markers.get(0).getLocation ());
+   sedi[0].draw ();
+   }*/
+  for (int i = 0; i < sedi.length; i++) { 
+    if (mostra.get(i)) {
+      pos = map.getScreenPosition(markers.get(i).getLocation ());
+      sedi[i].draw ();
+    }
   }
 }
 
@@ -193,20 +240,40 @@ void loadSedi() {
 
 
 void mouseClicked() {
-  ScreenPosition positionSanVito = map.getScreenPosition(SanVito);
-  ScreenPosition positionBari = map.getScreenPosition(Bari);
-  ScreenPosition positionGalanta = map.getScreenPosition(Galanta);
-  ScreenPosition positionQueretaro = map.getScreenPosition(Queretaro);
+  positionSanVito = map.getScreenPosition(SanVito);
+  positionBari = map.getScreenPosition(Bari);
+  positionGalanta = map.getScreenPosition(Galanta);
+  positionQueretaro = map.getScreenPosition(Queretaro);
   if (sanVitoMarker.isInside(mouseX, mouseY, positionSanVito.x, positionSanVito.y) && indicePunto == 18) {
     map.zoomAndPanToFit(FVG);
-  } else if (sanVitoMarker.isInside(mouseX, mouseY, positionBari.x, positionBari.y) && indicePunto == 18) {
+    mostra.set(0, true);
+    mostra.set(1, false);
+    mostra.set(2, false);
+    mostra.set(3, false);
+  } else if (bariMarker.isInside(mouseX, mouseY, positionBari.x, positionBari.y) && indicePunto == 18) {
     map.zoomAndPanToFit(Puglia);
-  } else if (sanVitoMarker.isInside(mouseX, mouseY, positionGalanta.x, positionGalanta.y) && indicePunto == 18) {
+    mostra.set(0, false);
+    mostra.set(1, true);
+    mostra.set(2, false);
+    mostra.set(3, false);
+  } else if (galantaMarker.isInside(mouseX, mouseY, positionGalanta.x, positionGalanta.y) && indicePunto == 18) {
     map.zoomAndPanToFit(SedeSlovakia);
-  } else if (sanVitoMarker.isInside(mouseX, mouseY, positionQueretaro.x, positionQueretaro.y) && indicePunto == 18) {
+    mostra.set(0, false);
+    mostra.set(1, false);
+    mostra.set(2, true);
+    mostra.set(3, false);
+  } else if (queretaroMarker.isInside(mouseX, mouseY, positionQueretaro.x, positionQueretaro.y) && indicePunto == 18) {
     map.zoomAndPanToFit(SedeMessico);
+    mostra.set(0, false);
+    mostra.set(1, false);
+    mostra.set(2, false);
+    mostra.set(3, true);
   } else {
     Milestone current = milestones[indicePunto];
+    mostra.set(0, false);
+    mostra.set(1, false);
+    mostra.set(2, false);
+    mostra.set(3, false);
 
     switch(current.nation) {
     case "Queretaro":
