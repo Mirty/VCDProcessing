@@ -82,7 +82,7 @@
     "year":"2006",
     "title":"Keymec: a specialized training project",
     "description":"The Brovedani factory in Galanta also obtains ISO TS 16949 certification. Components for the Siemens diesel injection system begin to be sold on the American market. And with the decisive contribution of Brovedani, the KEYMEC Center of Innovation, Research and Training in mechanics is opened. Its purpose is to train researchers and technicians who specialize in mechanics, in innovative processes, and in the prototyping of new products.",
-    "nation":"San Vito"
+    "nation":"San Vito - Galanta"
   },
   {
     "year":"2009",
@@ -106,7 +106,13 @@
     "year":"2013-2015",
     "title":"Leader in gasoline Direct Injection components",
     "description":"",
-    "nation":"San Vito"
+    "nation":""
+  },
+  {
+    "year":"2018",
+    "title":"KEY MILESTONES GOING FORWARD",
+    "description":"Leveraging trends in automotive industry. Expansion of product portfolio. NAFTA market consolidation",
+    "nation":""
   }
 ]
 }
