@@ -124,7 +124,7 @@ void setup () {
   MapUtils.createDefaultEventDispatcher(this, map);
 
   font = createFont ("Arial", 13);
-  fontBold = createFont ("Arial Bold", 15);
+  fontBold = createFont ("Arial-Black", 15);
 
   kinect = new Kinect(this);
   tracker = new KinectTracker();

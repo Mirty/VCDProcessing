@@ -38,6 +38,8 @@ class Sede {
 
   // metodi e funzioni
   void draw () {
+    textFont (font);
+    
     // fondazione
     int spessore = 12;
     strokeWeight (spessore);
