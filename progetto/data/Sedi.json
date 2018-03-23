@@ -2,12 +2,12 @@
   "sedi":[
   {
     "nome":"San Vito al Tagliamento, Italy",
-    "anno_fondazione":"1976",
-    "superficie_totale":"37800",
-    "superficie_produzione":"6895",
-    "n_impiegati" : "185",
-    "pezzi_annuali" : "31.7",
-    "vendite_annuali" : "24.1",
+    "anno_fondazione":"BR01: 1976, BRO2: 2004",
+    "superficie_totale":"46600",
+    "superficie_produzione":"11895",
+    "n_impiegati" : "326",
+    "pezzi_annuali" : "74.6",
+    "vendite_annuali" : "44.6",
     "coordinatex" : "45.94",
     "coordinatey" : "12.50",
   },

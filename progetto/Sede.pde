@@ -7,7 +7,7 @@ int distanza_tra_imgs = 20;
 class Sede {
   // proprietà
   String nome;
-  int anno_fondazione;
+  String anno_fondazione;
   float superficie_totale;
   float superficie_produzione;
   int n_impiegati;
@@ -25,7 +25,7 @@ class Sede {
   int n_monete;
 
   // costruttori
-  Sede (String nome, int anno_fondazione, float superficie_totale, float superficie_produzione, int n_impiegati, float pezzi_annuali, float vendite_annuali, Location coordinate) {
+  Sede (String nome, String anno_fondazione, float superficie_totale, float superficie_produzione, int n_impiegati, float pezzi_annuali, float vendite_annuali, Location coordinate) {
     this.nome = nome;
     this.anno_fondazione = anno_fondazione;
     this.superficie_totale = superficie_totale;
@@ -111,7 +111,7 @@ class Sede {
       fill (colore_principale);
       text (n_impiegati + " impiegati", pos.x + DIAMETRO/2 + n_rotelle * distanza_tra_imgs + 30, mouseY);
       text (pezzi_annuali + " mln pezzi per anno", pos.x + DIAMETRO/2 + n_rotelle * distanza_tra_imgs + 30, mouseY +30);
-      text (vendite_annuali + "mln € volume di vendita ", pos.x + DIAMETRO/2 + n_rotelle * distanza_tra_imgs + 30, mouseY + 60);
+      text (vendite_annuali + " mln € volume di vendita ", pos.x + DIAMETRO/2 + n_rotelle * distanza_tra_imgs + 30, mouseY + 60);
     } else {
       //cursor (ARROW);
     }
@@ -125,16 +125,26 @@ class Sede {
     float [] tot_vendite_annuali = new float  [sedi.length];
 
     for (int i = 0; i < sedi.length; i++) {
-      tot_anni_fondazione [i] = sedi[i].anno_fondazione;
       tot_superfici_totali [i] = sedi[i].superficie_totale;
       tot_n_impiegati [i] = sedi[i].n_impiegati;
       tot_prezzi_annuali [i] = sedi[i].pezzi_annuali;
       tot_vendite_annuali [i] = sedi[i].vendite_annuali;
+      if (i==0) {
+        tot_anni_fondazione [i] = int (sedi[i].anno_fondazione.substring (6,9));
+      }
+      else {
+        tot_anni_fondazione [i] = int(sedi[i].anno_fondazione);
+      }
+      
+      
     }
 
     // curva fondazione   
     angolo_iniziale = - PI;
-    angolo_finale = map (anno_fondazione, min (tot_anni_fondazione), max(tot_anni_fondazione), 2*PI, angolo_iniziale/2);
+    int anno;
+    if (anno_fondazione.length() == 4)   anno = int (anno_fondazione);
+    else anno = int (anno_fondazione.substring (6,9));
+    angolo_finale = map (anno, min (tot_anni_fondazione), max(tot_anni_fondazione), 2*PI, angolo_iniziale/2);
 
     // curva superficie
     max_diametro = DIAMETRO - 10;

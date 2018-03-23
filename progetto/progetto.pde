@@ -235,7 +235,7 @@ void loadSedi() {
     JSONObject sede = sediData.getJSONObject(i);
 
     String nome = sede.getString("nome");
-    int fondazione = sede.getInt("anno_fondazione");
+    String fondazione = sede.getString("anno_fondazione");
     float sup_tot = sede.getFloat("superficie_totale");
     float sup_prod = sede.getFloat("superficie_produzione");
     int impiegati = sede.getInt("n_impiegati");
