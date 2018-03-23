@@ -40,10 +40,10 @@ Location Bari = new Location(41.11, 16.77);
 Location Galanta = new Location(48.18, 17.73);
 Location Queretaro = new Location(20.82, -100.42);
 
-SimplePointMarker sanVitoMarker;
-SimplePointMarker galantaMarker;
-SimplePointMarker queretaroMarker;
-SimplePointMarker bariMarker;
+BMarker sanVitoMarker;
+BMarker galantaMarker;
+BMarker queretaroMarker;
+BMarker bariMarker;
 
 ScreenPosition positionSanVito;
 ScreenPosition positionBari;
@@ -52,9 +52,12 @@ ScreenPosition positionQueretaro;
 
 ArrayList <ScreenPosition> positions = new ArrayList <ScreenPosition> ();
 
+Info provaRettangolo;
+
 void setup () {
   //size (1200, 700);
   fullScreen (P2D);
+  pixelDensity(displayDensity());
   //background (255);
 
   map = new UnfoldingMap(this);
@@ -82,10 +85,10 @@ void setup () {
 
   map.zoomAndPanToFit(Italia);
 
-  sanVitoMarker = new SimplePointMarker(SanVito);
-  galantaMarker = new SimplePointMarker(Galanta);
-  queretaroMarker = new SimplePointMarker(Queretaro);
-  bariMarker = new SimplePointMarker(Bari);
+  sanVitoMarker = new BMarker(SanVito);
+  galantaMarker = new BMarker(Galanta); 
+  queretaroMarker = new BMarker(Queretaro);
+  bariMarker = new BMarker(Bari);
   map.addMarkers(sanVitoMarker, bariMarker, galantaMarker, queretaroMarker);
   bariMarker.setHidden(true);
   galantaMarker.setHidden(true);
@@ -153,11 +156,13 @@ void draw () {
 
   map.draw();
 
+  /*
   tracker.track();
   PVector v1 = tracker.getPos();
-  fill(100, 100, 250, 70);
-  noStroke();
+  fill(100, 100, 250, 70);*/
+  noStroke();/*
   ellipse(v1.x, v1.y, 50, 50);
+*/
 
   slider.draw ();
   indicePunto = slider.detectMouseInteraction ();
@@ -181,6 +186,11 @@ void draw () {
       pos = map.getScreenPosition(markers.get(i).getLocation ());
       sedi[i].draw ();
     }
+  }
+
+  provaRettangolo = new Info( slider.inizio_barra.x-10, 50, milestones[indicePunto].description, milestones[indicePunto].title);
+  if (indicePunto != milestones.length - 1) {
+    provaRettangolo.disegnaRect();
   }
 }
 
@@ -247,25 +257,25 @@ void mouseClicked() {
   positionBari = map.getScreenPosition(Bari);
   positionGalanta = map.getScreenPosition(Galanta);
   positionQueretaro = map.getScreenPosition(Queretaro);
-  if (sanVitoMarker.isInside(mouseX, mouseY, positionSanVito.x, positionSanVito.y) && indicePunto == 18) {
+  if (sanVitoMarker.isInside(mouseX, mouseY, positionSanVito.x, positionSanVito.y-30) && indicePunto == 18) {
     map.zoomAndPanToFit(FVG);
     mostra.set(0, true);
     mostra.set(1, false);
     mostra.set(2, false);
     mostra.set(3, false);
-  } else if (bariMarker.isInside(mouseX, mouseY, positionBari.x, positionBari.y) && indicePunto == 18) {
+  } else if (bariMarker.isInside(mouseX, mouseY, positionBari.x, positionBari.y-30) && indicePunto == 18) {
     map.zoomAndPanToFit(Puglia);
     mostra.set(0, false);
     mostra.set(1, true);
     mostra.set(2, false);
     mostra.set(3, false);
-  } else if (galantaMarker.isInside(mouseX, mouseY, positionGalanta.x, positionGalanta.y) && indicePunto == 18) {
+  } else if (galantaMarker.isInside(mouseX, mouseY, positionGalanta.x, positionGalanta.y-30) && indicePunto == 18) {
     map.zoomAndPanToFit(SedeSlovakia);
     mostra.set(0, false);
     mostra.set(1, false);
     mostra.set(2, true);
     mostra.set(3, false);
-  } else if (queretaroMarker.isInside(mouseX, mouseY, positionQueretaro.x, positionQueretaro.y) && indicePunto == 18) {
+  } else if (queretaroMarker.isInside(mouseX, mouseY, positionQueretaro.x, positionQueretaro.y-30) && indicePunto == 18) {
     map.zoomAndPanToFit(SedeMessico);
     mostra.set(0, false);
     mostra.set(1, false);
